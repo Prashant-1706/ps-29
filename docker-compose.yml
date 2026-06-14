@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: ps29
+    ports:
+      - "5432:5432"
+
+  mongodb:
+    image: mongo:6
+    ports:
+      - "27017:27017"
+
+  coreservices:
+    build:
+      context: "./coreservices (4)/coreservices"
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/ps29
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: root
+    depends_on:
+      - postgres
+
+  taskservices:
+    build:
+      context: "./taskservices (2)/taskservices"
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8002"
+    environment:
+      MONGO_URI: mongodb://mongodb:27017/ps29_content
+    depends_on:
+      - mongodb
+
+  gateway:
+    build:
+      context: "./gateway (4)/gateway"
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - coreservices
+      - taskservices
+
+  frontend:
+    build:
+      context: "./frontend (3)/frontend"
+      dockerfile: Dockerfile
+    ports:
+      - "5173:80"
+    depends_on:
+      - gateway

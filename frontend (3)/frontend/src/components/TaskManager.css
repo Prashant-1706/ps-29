@@ -1,0 +1,377 @@
+.tmanager {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 64px calc(100% - 114px) 50px;
+    position: relative;
+    animation: fadeIn 0.4s ease-out;
+}
+
+.tmanager .tmanager-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    background: rgba(17, 24, 39, 0.4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    margin-bottom: 16px;
+}
+
+.tmanager .tmanager-header > label {
+    font-size: 16pt;
+    font-family: var(--font-title);
+    font-weight: 700;
+    background: linear-gradient(135deg, #ffffff 0%, #a8b2d1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.tmanager .tmanager-header div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.tmanager .tmanager-header div label {
+    font-family: var(--font-title);
+    font-weight: 600;
+    color: var(--text-gray);
+    font-size: 9.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tmanager .tmanager-header div input {
+    height: 38px;
+    width: 280px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    color: #ffffff;
+    font-family: var(--font-sans);
+    padding: 0 14px;
+    transition: all 0.25s ease;
+}
+
+.tmanager .tmanager-header div input:focus {
+    border-color: var(--primary-color);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.tmanager .tmanager-header div button {
+    height: 38px;
+    padding: 0 20px;
+    background: var(--gradient-primary);
+    color: #ffffff;
+    font-family: var(--font-title);
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+    transition: all 0.2s ease;
+}
+
+.tmanager .tmanager-header div button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(99, 102, 241, 0.45);
+}
+
+.tmanager .tmanager-content {
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.tmanager .tmanager-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10px;
+}
+
+.tmanager .tmanager-footer button {
+    background: var(--gradient-success);
+    color: #ffffff;
+    padding: 8px 20px;
+    font-family: var(--font-title);
+    font-weight: 600;
+    font-size: 9.5pt;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tmanager .tmanager-footer button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(16, 185, 129, 0.45);
+}
+
+.tmanager .tmanager-footer .pages {
+    display: flex;
+    gap: 4px;
+}
+
+.tmanager .tmanager-footer .pages label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    font-family: var(--font-title);
+    font-weight: 600;
+    color: var(--text-gray);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tmanager .tmanager-footer .pages label:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+}
+
+.tmanager .tmanager-footer .pages label.active {
+    background: var(--gradient-primary);
+    border-color: var(--primary-color);
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(99, 102, 241, 0.25);
+}
+
+/* Glassmorphic Tables */
+.tmanager .tmanager-content table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+}
+
+.tmanager .tmanager-content table thead {
+    position: sticky;
+    top: 0;
+    background: var(--background);
+    z-index: 1;
+}
+
+.tmanager .tmanager-content table tr th {
+    background: var(--background);
+    color: var(--text-gray);
+    font-family: var(--font-title);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 8.5pt;
+    letter-spacing: 1px;
+    border: none;
+    padding: 12px 18px;
+}
+
+.tmanager .tmanager-content table tr td {
+    padding: 16px 18px;
+    background: rgba(30, 41, 59, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    color: #ffffff;
+    font-size: 9.5pt;
+}
+
+.tmanager .tmanager-content table tr td:first-child {
+    border-left: 1px solid rgba(255, 255, 255, 0.03);
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.tmanager .tmanager-content table tr td:last-child {
+    border-right: 1px solid rgba(255, 255, 255, 0.03);
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.tmanager .tmanager-content table tr {
+    transition: all 0.2s ease;
+}
+
+.tmanager .tmanager-content table tr:hover td {
+    background: rgba(30, 41, 59, 0.55);
+}
+
+.tmanager .tmanager-content table tr td img {
+    height: 16px;
+    margin: 0 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    filter: invert(0.8);
+}
+
+.tmanager .tmanager-content table tr td img:hover {
+    filter: invert(1) drop-shadow(0 0 4px var(--primary-color));
+    transform: scale(1.1);
+}
+
+/* Popups & Form Layout inside overlay */
+.tmanager .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(8, 11, 17, 0.85);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.25s ease-out;
+}
+
+.tmanager .overlay .popup {
+    background: #111625;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 28px;
+    width: 440px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.tmanager .overlay .popup .close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 20pt;
+    color: var(--text-gray);
+    cursor: pointer;
+    transition: color 0.2s ease;
+    line-height: 1;
+}
+
+.tmanager .overlay .popup .close:hover {
+    color: #ffffff;
+}
+
+.tmanager .overlay .popup h3 {
+    margin: 0 0 20px 0;
+    font-family: var(--font-title);
+    font-size: 14pt;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.tmanager .overlay .popup label {
+    display: block;
+    font-size: 8.5pt;
+    font-weight: 600;
+    color: var(--text-gray);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 6px;
+    margin-top: 12px;
+}
+
+.tmanager .overlay .popup select,
+.tmanager .overlay .popup input,
+.tmanager .overlay .popup textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    color: #ffffff;
+    font-family: var(--font-sans);
+    padding: 0 12px;
+    font-size: 9.5pt;
+    transition: all 0.25s ease;
+}
+
+.tmanager .overlay .popup input {
+    height: 38px;
+}
+
+.tmanager .overlay .popup select {
+    height: 38px;
+}
+
+.tmanager .overlay .popup textarea {
+    padding: 10px 12px;
+    resize: none;
+    line-height: 1.5;
+}
+
+.tmanager .overlay .popup select:focus,
+.tmanager .overlay .popup input:focus,
+.tmanager .overlay .popup textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.tmanager .overlay .popup button {
+    width: 100%;
+    height: 40px;
+    margin-top: 24px;
+    background: var(--gradient-primary);
+    color: #ffffff;
+    font-family: var(--font-title);
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    transition: all 0.2s ease;
+}
+
+.tmanager .overlay .popup button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(99, 102, 241, 0.45);
+}
+
+/* Inputs Errors indicators */
+.tmanager .tmanager-header div input.error,
+.tmanager .overlay .popup textarea.error,
+.tmanager .overlay .popup select.error,
+.tmanager .overlay .popup input.error {
+    border: 1px solid var(--red);
+    background: var(--error-background);
+}
+
+/* User search Autocompleter dropdown list */
+.tmanager .overlay .popup .dropdown {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.tmanager .overlay .popup .dropdown ul {
+    position: absolute;
+    background: #1e2538;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    width: 100%;
+    max-height: 140px;
+    overflow-y: auto;
+    z-index: 1010;
+    list-style: none;
+    left: 0;
+    margin: 0;
+    padding: 6px 0;
+    margin-top: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.tmanager .overlay .popup .dropdown ul li {
+    padding: 10px 14px;
+    cursor: pointer;
+    color: var(--text-dark);
+    font-size: 9pt;
+    transition: all 0.15s ease;
+}
+
+.tmanager .overlay .popup .dropdown ul li.active,
+.tmanager .overlay .popup .dropdown ul li:hover {
+    background: var(--ddhover);
+    color: #ffffff;
+}
