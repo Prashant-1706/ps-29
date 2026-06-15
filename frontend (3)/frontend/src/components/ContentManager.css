@@ -433,3 +433,11 @@
     line-height: 1.5;
 }
 
+.tab-pane table td button.delete-btn:hover {
+    background: #ef4444;
+    border-color: #ef4444;
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
+}
+
+

@@ -41,4 +41,17 @@ public class DraftService {
 		}
 		return map;
 	}
+
+	public Map<String, Object> deleteDraft(Long draftId, String token) {
+		Map<String, Object> map = new HashMap<>();
+		try {
+			draftRepo.deleteById(draftId);
+			map.put("code", 200);
+			map.put("message", "Draft deleted successfully.");
+		} catch(Exception e) {
+			map.put("code", 500);
+			map.put("message", e.getMessage());
+		}
+		return map;
+	}
 }

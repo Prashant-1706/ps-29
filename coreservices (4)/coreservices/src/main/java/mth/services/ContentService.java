@@ -41,4 +41,17 @@ public class ContentService {
 		}
 		return map;
 	}
+
+	public Map<String, Object> deleteContent(Long contentId, String token) {
+		Map<String, Object> map = new HashMap<>();
+		try {
+			contentRepo.deleteById(contentId);
+			map.put("code", 200);
+			map.put("message", "Content deleted successfully.");
+		} catch(Exception e) {
+			map.put("code", 500);
+			map.put("message", e.getMessage());
+		}
+		return map;
+	}
 }

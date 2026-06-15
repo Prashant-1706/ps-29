@@ -1,10 +1,11 @@
+import os
 from fastapi import APIRouter, Header
 from models.schemas import SigninSchema, SignupSchema, UsersSchema
 import httpx
 
 router = APIRouter(prefix="/authservice")
 
-SPRING_URL = "http://localhost:8001/"
+SPRING_URL = os.environ.get("SPRING_URL", "http://localhost:8001/").rstrip("/") + "/"
 
 @router.post("/signup")
 async def signup(U: SignupSchema):

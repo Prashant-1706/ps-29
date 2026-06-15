@@ -1,4 +1,4 @@
-export const apibaseurl = "http://localhost:8000";
+export const apibaseurl = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
 export const imgurl = import.meta.env.BASE_URL;
 
 export function showToast(message, type = "info") {

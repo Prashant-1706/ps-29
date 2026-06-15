@@ -88,4 +88,17 @@ router.get('/versions/:contentId', async (req, res) => {
     }
 });
 
+router.delete('/delete/:contentId', async (req, res) => {
+    try {
+        const { contentId } = req.params;
+        await ContentVersion.deleteMany({ contentId });
+        await EditLog.deleteMany({ contentId });
+        await ContentEmbedding.deleteOne({ contentId });
+        res.status(200).json({ code: 200, message: "Versions and embeddings deleted successfully" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ code: 500, message: "Error deleting versions and embeddings" });
+    }
+});
+
 export default router;

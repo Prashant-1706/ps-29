@@ -22,4 +22,9 @@ public class DraftController {
 	public Object getDraftsByAuthor(@PathVariable("authorId") Long authorId, @RequestHeader(value = "Token", required = false) String token) {
 		return draftService.getDraftsByAuthor(authorId, token);
 	}
+
+	@DeleteMapping("/delete/{draftId}")
+	public Object deleteDraft(@PathVariable("draftId") Long draftId, @RequestHeader(value = "Token", required = false) String token) {
+		return draftService.deleteDraft(draftId, token);
+	}
 }

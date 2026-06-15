@@ -1,10 +1,11 @@
+import os
 from fastapi import APIRouter, Header
 from models.schemas import TasksSchema
 import httpx
 
 router = APIRouter(prefix="/taskservice")
 
-NODE_URL = "http://127.0.0.1:8002/"
+NODE_URL = os.environ.get("NODE_URL", "http://127.0.0.1:8002/").rstrip("/") + "/"
 
 
 async def call_node(method: str, url: str, token: str, json_data=None):

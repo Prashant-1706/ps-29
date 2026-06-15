@@ -22,4 +22,9 @@ public class ContentController {
 	public Object getContentByAuthor(@PathVariable("authorId") Long authorId, @RequestHeader(value = "Token", required = false) String token) {
 		return contentService.getContentByAuthor(authorId, token);
 	}
+
+	@DeleteMapping("/delete/{contentId}")
+	public Object deleteContent(@PathVariable("contentId") Long contentId, @RequestHeader(value = "Token", required = false) String token) {
+		return contentService.deleteContent(contentId, token);
+	}
 }

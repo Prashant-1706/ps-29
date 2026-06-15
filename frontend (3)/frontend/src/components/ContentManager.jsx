@@ -138,6 +138,38 @@ const ContentManager = ({ logout, userId }) => {
         callApi("POST", `${apibaseurl}/content/save_version`, payload, null, () => {}, token);
     };
 
+    const handleDeleteDraft = (draftId) => {
+        const confirmed = window.confirm("Are you sure you want to delete this draft?");
+        if (!confirmed) return;
+        
+        setIsProgress(true);
+        callApi("DELETE", `${apibaseurl}/draft/delete/${draftId}`, null, null, (res) => {
+            setIsProgress(false);
+            if (res && (res.code === 200 || res.status === 200)) {
+                showToast("Draft deleted successfully!", "success");
+                loadDrafts();
+            } else {
+                showToast("Error deleting draft: " + (res.message || "Unknown error"), "error");
+            }
+        }, token);
+    };
+
+    const handleDeleteContent = (contentId) => {
+        const confirmed = window.confirm("Are you sure you want to delete this published content?");
+        if (!confirmed) return;
+        
+        setIsProgress(true);
+        callApi("DELETE", `${apibaseurl}/content/delete/${contentId}`, null, null, (res) => {
+            setIsProgress(false);
+            if (res && (res.code === 200 || res.status === 200)) {
+                showToast("Content deleted successfully!", "success");
+                loadPublished();
+            } else {
+                showToast("Error deleting content: " + (res.message || "Unknown error"), "error");
+            }
+        }, token);
+    };
+
     const viewVersions = (contentId) => {
         setIsProgress(true);
         callApi("GET", `${apibaseurl}/content/versions/${contentId}`, null, null, (res) => {
@@ -187,6 +219,7 @@ const ContentManager = ({ logout, userId }) => {
                                         <td>
                                             <button onClick={() => openEditor(d)}>Edit</button>
                                             <button onClick={() => viewVersions(d.id.toString())}>Versions</button>
+                                            <button className="delete-btn" onClick={() => handleDeleteDraft(d.id)}>Delete</button>
                                         </td>
                                     </tr>
                                 ))}
@@ -208,6 +241,7 @@ const ContentManager = ({ logout, userId }) => {
                                         <td>
                                             <button onClick={() => openEditor(p)}>View</button>
                                             <button onClick={() => viewVersions(p.id.toString())}>Versions</button>
+                                            <button className="delete-btn" onClick={() => handleDeleteContent(p.id)}>Delete</button>
                                         </td>
                                     </tr>
                                 ))}

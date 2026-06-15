@@ -1,0 +1,59 @@
+services:
+  - type: web
+    name: coreservices
+    env: docker
+    dockerContext: "./coreservices (4)/coreservices"
+    dockerfilePath: "./coreservices (4)/coreservices/Dockerfile"
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        value: "jdbc:postgresql://dpg-d8nnvhr7uimc73a33m00-a.oregon-postgres.render.com:5432/ps_29"
+      - key: SPRING_DATASOURCE_USERNAME
+        value: "ps_29_user"
+      - key: SPRING_DATASOURCE_PASSWORD
+        value: "0GQikQOUy1FZzMmCsYJVeHvCxZy804CY"
+      - key: PORT
+        value: "8001"
+
+  - type: web
+    name: taskservices
+    env: docker
+    dockerContext: "./taskservices (2)/taskservices"
+    dockerfilePath: "./taskservices (2)/taskservices/Dockerfile"
+    envVars:
+      - key: PORT
+        value: "8002"
+      - key: DBURL
+        value: "mongodb://admin:root@ac-fbuk16y-shard-00-00.6mtbvyu.mongodb.net:27017,ac-fbuk16y-shard-00-01.6mtbvyu.mongodb.net:27017,ac-fbuk16y-shard-00-02.6mtbvyu.mongodb.net:27017/project?ssl=true&replicaSet=atlas-45vsao-shard-0&authSource=admin&appName=Cluster0"
+      - key: SECRETE_KEY
+        value: "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0987654321"
+
+  - type: web
+    name: gateway
+    env: docker
+    dockerContext: "./gateway (4)/gateway"
+    dockerfilePath: "./gateway (4)/gateway/Dockerfile"
+    envVars:
+      - key: PORT
+        value: "8000"
+      - key: SPRING_URL
+        fromService:
+          type: web
+          name: coreservices
+          envVarKey: RENDER_EXTERNAL_URL
+      - key: NODE_URL
+        fromService:
+          type: web
+          name: taskservices
+          envVarKey: RENDER_EXTERNAL_URL
+
+  - type: web
+    name: frontend
+    env: docker
+    dockerContext: "./frontend (3)/frontend"
+    dockerfilePath: "./frontend (3)/frontend/Dockerfile"
+    envVars:
+      - key: VITE_API_BASE_URL
+        fromService:
+          type: web
+          name: gateway
+          envVarKey: RENDER_EXTERNAL_URL
